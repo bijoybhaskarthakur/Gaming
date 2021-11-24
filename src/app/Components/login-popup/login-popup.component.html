@@ -1,0 +1,44 @@
+<div bsModal #createOrEditModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+    aria-labelledby="createOrEditModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="width: 400px;">
+        <div class="modal-content" style="background: #2D325A;
+        border-radius: 30px;">
+
+            <form novalidate autocomplete="off">
+                <!-- <div class="modal-header">
+                    <h4 class="modal-title">
+                        <span>Login Popup</span>
+                    </h4>
+                    <button type="button" class="close" (click)="close()" aria-label="Close" [disabled]="saving">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div> -->
+                <div class="modal-body">
+                    <div style="display: flex;flex-direction: column;align-items: center;">
+                        <div class="mb-3">
+                            <img src="assets/images/icons/popupLogo.png" style="width: 150px;">
+                        </div>
+                        <div class="form-group" style="display: flex;
+                        flex-direction: column;
+                        color: white;">
+                            <label for="login" style="font-size: 20px;">Login </label>
+                            <input name="login"  [(ngModel)]="loginValue" class="txt_input mt-1" *ngIf="!isSendOtp">
+                            <ng-otp-input  (onInputChange)="onOtpChange($event)"  [config]="{length:4}" *ngIf="isSendOtp"></ng-otp-input>
+                            <div class="mt-4">
+                                <button class="btn snd_btn" (click)="save()" *ngIf="!isSendOtp">SEND OTP</button>
+                                <button class="btn snd_btn" (click)="login()" *ngIf="isSendOtp">LOGIN</button>
+                            </div>
+                            <!-- <input type="text" #login="ngModel"class="form-control" [(ngModel)]="login" name="login" /> -->
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="modal-footer">
+                    <button  type="button" class="btn btn-default" (click)="close()">Cancel</button>
+                    <button type="submit" class="btn btn-primary blue"  ><i class="fa fa-save"></i> <span>Save</span></button>
+                </div> -->
+            </form>
+
+        </div>
+    </div>
+
+</div>

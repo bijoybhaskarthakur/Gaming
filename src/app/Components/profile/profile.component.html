@@ -1,0 +1,232 @@
+<div class="main">
+	<section class="inner-wrap">
+		<div class="prfl_det">
+			<div class="prfl_det_inner">
+				<img [src]="getImageUrl(profileDetails?.profile_pic)" class="profile_pic">
+			</div>
+			<div class="prfl_det_pic"><span (click)="editProfileDetails()"><img src="assets/images/icons/edit_white.png"
+						class="edt_btn_white"></span></div>
+			<div style="margin-top: -40px;">Profile Title: {{profileDetails?.first_name}} {{profileDetails?.last_name}}
+			</div>
+			<div class="mb-2 mt-2"><span style="margin-right: 15px;">My Linktree:
+					<a href="http://143.110.178.62/#/linkedtree/{{profileDetails?.user_name}}" target="_blank">http://143.110.178.62/#/linkedtree/{{profileDetails?.user_name}}</a></span><button class="btn"
+					style="margin-right: 15px; background: #FF0882; color: white;">Share</button></div>
+			<div>
+				<button class="btn" style="margin-right: 15px; background: #3E446F; color: white;">Preview</button>
+			</div>
+
+		</div>
+		<div class="white_clr crt_lnk_pos">Create Links
+			<button class="btn btn-primary" style="background: #FF0882; color: white;" (click)="addLink()">Add</button>
+		</div>
+		<div class="prfl_link_det" *ngFor="let link of links; index as i; first as isFirst">
+			<div class="d-flex justify-content-between">
+				<span>{{link.name}}<span (click)="editLink(link)"><img src="assets/images/icons/edit.png"
+							class="edt_btn"></span></span>
+				<span>
+					<!-- <div class="custom-control custom-switch">
+						<div class="custom-control custom-switch">
+							<input type="checkbox" class="custom-control-input" (click)="pp()" [(ngModel)]="is_active"
+								name="lol">
+							<label class="custom-control-label" for="lol"></label>
+						</div>
+					</div> -->
+				</span>
+			</div>
+			<div class="mt-3">{{link.value}}<span (click)="editLink(link)"><img src="assets/images/icons/edit.png"
+						class="edt_btn"></span></div>
+			<div>
+
+				<button type="button" style="color:#BEBEBE;
+				font-size: 14px;" (click)="deleteLink(i)" class="btn btn-block mb-2  mx-auto mt-3 dlt_btn"><span><img
+							src="assets/images/icons/trash.png" class="trsh_btn_img"></span>Delete</button>
+			</div>
+		</div>
+	</section>
+
+</div>
+
+
+<!-- certificate modal start -->
+
+<div class="modal fade" id="link" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content cust_modal">
+			<div class="modal_close" data-dismiss="modal" aria-label="Close">
+				<img src="/assets/img/ICONS/cross.svg" class="img-fluid" width="100%" alt="">
+			</div>
+			<div class="modal-body">
+				<div data-dismiss="modal" aria-label="Close" class="modal_close"><img 
+					src="/assets/images/icons/cross.svg" width="100%" alt="" class="img-fluid"></div>
+				<ng-container class="mb-2">
+					<div class="mb-4">
+						<span style="font-weight: 600;font-size: 18px;" *ngIf="true">Add
+							Link</span>
+					</div>
+				</ng-container>
+				<form #linkForm="ngForm" (ngSubmit)="linkSubmit(linkForm)">
+					<input hidden class="form-control int_dsgn" id="linkId" type="text" name="linkId"
+						[(ngModel)]="link.id" placeholder=" " />
+
+					<div class="form-group">
+						<div>
+							<div class="has-float-label frm_cnt_wdt">
+								<label for="linkTitle" style="font: 17px;">Name</label>
+								<input class="form-control int_dsgn" id="linkTitle" type="text" name="linkTitle"
+									[(ngModel)]="link.name" placeholder=" "
+									[ngClass]="{'invalid': linkSubmitted && !linkForm.controls.linkTitle?.valid}"
+									required />
+
+							</div>
+							<div *ngIf="linkSubmitted && !linkForm.controls.linkTitle?.valid">
+								<img src="/assets/img/ICONS/info.png" alt="logo" style="width: 16px;">
+							</div>
+						</div>
+						<div *ngIf="linkSubmitted && !linkForm.valid">
+							<span *ngIf="!linkForm.controls.certificateTitle?.valid" class="error_msg">Title
+								is required</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<div>
+							<div class="has-float-label frm_cnt_wdt">
+
+								<label for="linkValue" style="font: 17px;">Description</label>
+								<input class="form-control int_dsgn" id="linkValue" type="text" name="linkValue"
+									[(ngModel)]="link.value"
+									[ngClass]="{'invalid': linkSubmitted && !linkForm.controls.linkValue?.valid}"
+									required>
+
+							</div>
+							<div *ngIf="linkSubmitted && !linkForm.controls.linkValue?.valid">
+								<img src="/assets/img/ICONS/info.png" alt="logo" style="width: 16px;">
+							</div>
+						</div>
+						<div *ngIf="linkSubmitted && !linkForm.controls.certificateDescription?.valid">
+							<span *ngIf="!linkForm.controls.certificateDescription?.valid" class="error_msg">Description
+								is required</span>
+						</div>
+					</div>
+
+					<div class="form-group" style="display: flex;
+						justify-content: flex-end;">
+						<div>
+
+						</div>
+						<div style="margin-left: 10px;">
+							<button type="submit" style="background: #FF0882;;
+								color: white;
+								width: 120px;
+								
+								font-size: 14px;" class="btn btn-block mb-2  mx-auto mt-3 sbm_btn">Submit</button>
+						</div>
+
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+	<!-- <p-toast position="bottom-left" key="bl"></p-toast> -->
+</div>
+<!-- certificate modal end -->
+
+
+<!-- profile modal start -->
+<div class="modal fade" id="profile" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content cust_modal">
+			<div class="modal_close" data-dismiss="modal" aria-label="Close">
+				<img src="/assets/img/ICONS/cross.svg" class="img-fluid" width="100%" alt="">
+			</div>
+			<div class="modal-body">
+				<div data-dismiss="modal" aria-label="Close" class="modal_close"><img 
+						src="/assets/images/icons/cross.svg" width="100%" alt="" class="img-fluid"></div>
+				<ng-container class="mb-2">
+					<div class="mb-4">
+						<span style="font-weight: 600;font-size: 18px;" *ngIf="true">Add
+							Profile Details</span>
+						<!-- <span style="font-weight: 600;font-size: 18px;" *ngIf="isEditcertificate">Edit
+								Certificate</span> -->
+					</div>
+				</ng-container>
+				<form #profileForm="ngForm" (ngSubmit)="profileSubmit(profileForm)">
+
+					<div class="form-group">
+						<div class="custom-dropzone mt-2 mb-2" ngx-dropzone [accept]="'image/*'"
+							(change)="logoUpload($event)" [maxFileSize]="1000000">
+							<ngx-dropzone-label>
+								<img src="/assets/images/icons/upload.png" style="height: 38px;" class="img-fluid">
+								<br>
+								<span style="color:#969696;font-size: 12px;">Drag & drop or
+									<span style="color:#269F90">browse</span></span>
+								<!-- <i class="fa fa-upload" aria-hidden="true"></i> (Recommended Size: 400 * 300) -->
+							</ngx-dropzone-label>
+							<ngx-dropzone-image-preview class="custom-preview" ngProjectAs="ngx-dropzone-preview"
+								*ngFor="let l of logo" [file]="l" [removable]="true" (removed)="logoRemove(l)">
+							</ngx-dropzone-image-preview>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div>
+							<div class="has-float-label frm_cnt_wdt">
+								<label for="first_name" style="font: 17px;">First Name</label>
+								<input class="form-control int_dsgn" id="first_name" type="text" name="first_name"
+									[(ngModel)]="profileDetails.first_name" placeholder=" " />
+
+							</div>
+							<div *ngIf="profileSubmitted && !profileForm.controls.first_name?.valid">
+								<img src="/assets/img/ICONS/info.png" alt="logo" style="width: 16px;">
+							</div>
+						</div>
+						<div *ngIf="profileSubmitted && !profileForm.valid">
+							<span *ngIf="!profileForm.controls.first_name?.valid" class="error_msg">Title
+								is required</span>
+						</div>
+					</div>
+
+
+					<div class="form-group">
+						<div>
+							<div class="has-float-label frm_cnt_wdt">
+								<label for="last_name" style="font: 17px;">Last Name</label>
+								<input class="form-control int_dsgn" id="last_name" type="text" name="last_name"
+									[(ngModel)]="profileDetails.last_name" placeholder=" "
+									[ngClass]="{'invalid': profileSubmitted && !profileForm.controls.last_name?.valid}"
+									required />
+
+							</div>
+							<div *ngIf="profileSubmitted && !linkForm.controls.last_name?.valid">
+								<img src="/assets/img/ICONS/info.png" alt="logo" style="width: 16px;">
+							</div>
+						</div>
+						<div *ngIf="profileSubmitted && !profileForm.valid">
+							<span *ngIf="!profileForm.controls.last_name?.valid" class="error_msg">Title
+								is required</span>
+						</div>
+					</div>
+
+
+					<div class="form-group" style="display: flex;
+						justify-content: flex-end;">
+						<div>
+
+						</div>
+						<div style="margin-left: 10px;">
+							<button type="submit" style="background: #FF0882;;
+								color: white;
+								width: 120px;
+								
+								font-size: 14px;" class="btn btn-block mb-2  mx-auto mt-3 sbm_btn">Submit</button>
+						</div>
+
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+	<!-- <p-toast position="bottom-left" key="bl"></p-toast> -->
+</div>
+<!-- profile modal end -->

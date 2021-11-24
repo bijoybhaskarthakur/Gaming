@@ -1,0 +1,49 @@
+.prfl_det{
+    color: white;
+    text-align: center;
+    background: #2D325A;
+    padding: 0px 40px 40px 40px;
+    margin: 90px;
+}
+.prfl_link_det{
+    color: white;
+    //text-align: center;
+    background: #2D325A;
+    padding: 40px;
+    margin: 90px;
+}
+.profile_pic{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.prfl_det_inner{
+    position: relative;
+    top: -44px;
+}
+.dlt_btn{
+    background: rgba(74, 80, 125, 0.6);
+    width: 130px;
+}
+.edt_btn{
+    width: 20px;
+    margin-left: 10px;
+}
+.trsh_btn_img{
+    width: 20px;
+    margin-right: 10px;
+    margin-top: -2px;
+}
+.crt_lnk_pos{
+    margin: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.prfl_btn{
+    background: #FF0882;
+    color: white;
+    padding: 10px 100px;
+    border-radius: 10px;
+}

@@ -1,0 +1,76 @@
+<!-- main app container -->
+<div class="main">
+    <!-- {{item.name}} -->
+    <section class="inner-wrap">
+    <div class="mt-5 pg_hdng">
+        <form  class="navbar-form navbar-left ng-untouched ng-pristine ng-valid">
+            <div  class="input-group" style="display: flex;align-items: center;">
+                <!-- <div class="input-group-btn">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="pi pi-search">H</i>
+                    </button>
+                </div> -->
+                <input type="text" placeholder="Search" name="searchKey" [(ngModel)]="searchKey" class="form-control" (keyup)="searchhValue()">
+                <div >
+                    <select name="searchType" id="searchType" class="slt_opt" [(ngModel)]="searchType" (click)="selectSearchType()">
+                        <option value="all">All</option>
+                        <option value="players">Player</option>
+                        <option value="teams">Team</option>
+                      </select>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="trdnPlrOuter" *ngFor="let item of searchData; let i = index">
+        <div  class="trdnPlr_img_det">
+            <div class="trdnPlr_img_det_pos">
+                #{{i + 1}}
+            </div>
+            <div class="trdnPlr_img_det_img">
+                <img [src]="getImageUrl(item?.profile_pic_without_bg)" style="    max-width: 110px;
+                max-height: 110px;
+                position: relative;
+                top: -14px;">
+            </div>
+            <div class="trdnPlr_img_det_name">
+                <a [routerLink]="['/playerDetails']" [queryParams]="{id: item.id}" style="color: white;">
+                    {{item.name}}
+                </a>
+            </div>
+        </div>
+        <div class="trdnPlr_img_det_sccr">
+            <div class="trdnPlr_img_det_sccr_value">
+                <span>10 - 8 </span>
+                <br>
+                <span class="txt-pnk">264</span>
+            </div>
+            <div class="trdnPlr_img_det_sccr_value">
+                <span>10 - 8 </span>
+                <br>
+                <span  class="txt-pnk">264</span>
+            </div>
+            <div class="trdnPlr_img_det_sccr_value">
+                <span>10 - 8 </span>
+                <br>
+                <span class="txt-pnk">264</span>
+            </div>
+
+        </div>
+        <div class="trdnPlr_img_det_vote">
+            <button class="btn" style="margin-right: 15px;background: #FF0882; color: white;">
+                <img src="assets/images/icons/up.png"
+                    style="width: 15px; margin-right: 10px;margin-bottom: 3px;">
+                <span style="margin-right: 10px;">Upvote</span>{{item.upvote_score}}
+            </button>
+            <button class="btn" style="margin-right: 15px;" style="margin-right: 15px; border: 2px solid #F65164;color: #F65164;">
+                <img src="assets/images/icons/down.png" style="width: 15px; margin-right: 10px;">
+                <span style="margin-right: 10px;">Downvote</span>{{item.downvote_score}}
+            </button>
+        </div>
+    </div>
+    <div >
+        <jw-pagination [items]="searchData" (changePage)="onChangePage($event)"></jw-pagination>
+    </div>
+</section>
+</div>
+

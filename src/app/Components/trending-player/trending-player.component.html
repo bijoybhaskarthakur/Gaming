@@ -1,0 +1,59 @@
+<!-- main app container -->
+<div class="main">
+            <!-- {{item.name}} -->
+            <section class="inner-wrap">
+            <div class="mt-5 pg_hdng">Trending Players</div>
+            <div class="trdnPlrOuter" *ngFor="let item of trendingPlayer; let i = index">
+                <div  class="trdnPlr_img_det">
+                    <div class="trdnPlr_img_det_pos">
+                        #{{i + 1}}
+                    </div>
+                    <div class="trdnPlr_img_det_img">
+                        <img [src]="getImageUrl(item?.profile_pic_without_bg)" style="    max-width: 110px;
+                        max-height: 110px;
+                        position: relative;
+                        top: -14px;">
+                    </div>
+                    <div class="trdnPlr_img_det_name">
+                        <a [routerLink]="['/playerDetails']" [queryParams]="{id: item.id}" style="color: white;">
+                            {{item.name}}
+                        </a>
+                    </div>
+                </div>
+                <div class="trdnPlr_img_det_sccr">
+                    <div class="trdnPlr_img_det_sccr_value">
+                        <span>10 - 8 </span>
+                        <br>
+                        <span class="txt-pnk">264</span>
+                    </div>
+                    <div class="trdnPlr_img_det_sccr_value">
+                        <span>10 - 8 </span>
+                        <br>
+                        <span  class="txt-pnk">264</span>
+                    </div>
+                    <div class="trdnPlr_img_det_sccr_value">
+                        <span>10 - 8 </span>
+                        <br>
+                        <span class="txt-pnk">264</span>
+                    </div>
+
+                </div>
+                <div class="trdnPlr_img_det_vote">
+                    <button class="btn" [ngClass]="getUpVoteClass('player',item.id)" (click)="upVote('player',item.id)">
+                        <img src="assets/images/icons/up_red.png"
+                            style="width: 15px; margin-right: 10px;margin-bottom: 3px;">
+                        <span style="margin-right: 10px;">Upvote</span>{{item.upvote_score}}
+                    </button>
+                    <button class="btn" [ngClass]="getDownVoteClass('player',item.id)" (click)="downVote('player',item.id)">
+                        <img src="assets/images/icons/down_red.png" style="width: 15px; margin-right: 10px;">
+                        <span style="margin-right: 10px;">Downvote</span>{{item.downvote_score}}
+                    </button>
+                </div>
+            </div>
+            <div>
+                <jw-pagination [items]="trendingPlayer" (changePage)="onChangePage($event)"></jw-pagination>
+            </div>
+        </section>
+</div>
+    
+<app-login-popup #loginPopup (loadDataEvent)="loadData()"></app-login-popup>

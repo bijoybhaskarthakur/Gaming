@@ -1,0 +1,64 @@
+
+.trdnPlrOuter{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    padding: 0px 20px;
+    margin: 40px 0px;
+    background: #2d325a;
+    border-radius: 10px;
+    max-height: 82px;
+}
+.trdnPlr_img_det{
+    display: flex;
+    align-items: center;
+}
+.trdnPlr_img_det_sccr{
+    display: flex;
+    align-items: center;
+}
+
+.trdnPlr_img_det_img{
+    width: 120px;
+    margin-right: 10px;
+}
+.trdnPlr_img_det_pos{
+    width: 50px;
+}
+.trdnPlr_img_det_name{
+    width: 100px;
+}
+.pg_hdng{
+    font-size: 26px;
+    color: white;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 80px;
+}
+.txt-pnk{
+    color: #FF0882;
+}
+.trdnPlr_img_det_sccr_value{
+    margin-right: 15px;
+    text-align: center;
+}
+.upVoteActive,.downVoteActive{
+    margin-right: 15px;
+    background: #FF0882;
+     color: white;
+    
+  }
+  
+  .upVoteActive img{
+    content:url("/assets/images/icons/up_white.png");
+  }
+  .downVoteActive img{
+    content:url("/assets/images/icons/down_white.png");
+  }
+  
+  .upVote,.downVote{
+    margin-right: 15px;
+      border: 2px solid #F65164;
+      color: #F65164;
+  }

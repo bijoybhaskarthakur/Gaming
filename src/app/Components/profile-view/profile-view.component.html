@@ -1,0 +1,16 @@
+<div class="main">
+    <section class="inner-wrap">
+        <div class="prfl_det">
+            <div class="prfl_det_inner">
+				<img [src]="getImageUrl(profileData?.profile_pic)" class="profile_pic">
+			</div>
+            <div>Profile Title: Dynamo </div>
+            <div *ngFor="let item of linkedTree; index as i" style="padding: 20px 10px;">
+                <a href="{{item.value}}" target="_blank" class="prfl_btn">{{item.name}}</a>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+
